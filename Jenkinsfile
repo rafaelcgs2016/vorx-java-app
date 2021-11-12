@@ -26,10 +26,9 @@ pipeline {
             }
         }
         
-        stage('Cleanup') {
+        stage('Deploy') {
 		steps {
-			sh './jenkins/build/mvn.sh mvn clean'
-			deleteDir()
+			sh './jenkins/deploy/deploy.sh'
 		    }
 	    }
     }
