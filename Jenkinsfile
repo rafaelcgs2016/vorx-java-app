@@ -25,17 +25,20 @@ pipeline {
                '''
             }
         }
-        stage('Deploy') {
-            steps {
-               sh './jenkins/deploy/deploy.sh'
-            }
-        }
+        
         stage('Cleanup') {
 		steps {
 			sh './jenkins/build/mvn.sh mvn clean'
 			deleteDir()
 		    }
 	    }
+    }
+	post {
+        always {
+            echo 'Limpando diretorios'
+            sh './jenkins/build/mvn.sh mvn clean'
+	    deleteDir()
+        }
     }
 }
 
